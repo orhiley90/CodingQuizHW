@@ -12,13 +12,9 @@ let actAnswer = ["A", "A", "A", "A", "B"];
 
 let counter = 0;
 
-let timeEl = $(".time");
-
-let mainEl = $("#main");
-
 let secondsLeft = 0;
 
-let timer = setInterval(setTime, 1000);
+let timer;
 
 
 $(document).ready(function () {
@@ -27,13 +23,16 @@ $(document).ready(function () {
     console.log($("#start-button"));
     $("#start-button").on("click", function () {
         secondsLeft = 100;
+        timer = setInterval(setTime, 1000);
         popQuestion();
     })
 
 }
 );
 function popQuestion() {
-
+    if (counter == questArray.length) {
+        endQuiz();
+    }
     let question = questArray[counter];
     let ansA = ansAArray[counter];
     let ansB = ansBArray[counter];
@@ -41,7 +40,7 @@ function popQuestion() {
     let ansD = ansDArray[counter];
     let actAns = actAnswer[counter];
     let tally = 0;
-    
+
     $("#title").hide();
     $("#emptyQuiz").text(question);
     // hide the start button and shows the question
@@ -57,7 +56,8 @@ function popQuestion() {
     // start the timer
     $("#main").show();
     
-  
+
+
 
     //    This function should check answer and then subtract time or count up correct answers depending on if it is correct or 
     // if(actAns =  ansA.charAt(0)){
@@ -78,25 +78,32 @@ function validateAnswer(inputAns) {
         counter++;
         // maths that subtracts 15 seconds from timer
         secondsLeft = (secondsLeft - 15);
-        if (secondsLeft <= 0){
-            clearInterval(timer);
-            secondsLeft = 0;
+        if (secondsLeft <= 0) {
+
 
             // will end the quiz
+            endQuiz();
+            clearInterval(timer);
+            secondsLeft = 0;
         }
     }
     popQuestion();
 }
 
 function setTime() {
-    
+
 
     $("#main").text(secondsLeft--);
+    if (secondsLeft <= 0) {
+        secondsLeft = 0;
+        endQuiz();
 
-   
+    }
 }
 
-
-function endQuiz(){
+function endQuiz() {
+    clearInterval(timer);
+    $("#quizAnsRow").hide();
     
 }
+
