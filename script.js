@@ -16,46 +16,54 @@ let secondsLeft = 0;
 
 let timer;
 
+let yourScores = $("#yourScores");
 
 $(document).ready(function () {
+    $("#initialsGoHere").hide();
     $("#quizAnsRow").hide();
     $("#main").hide();
+    $("#yourScoresDiv").hide();
     console.log($("#start-button"));
     $("#start-button").on("click", function () {
         secondsLeft = 100;
         timer = setInterval(setTime, 1000);
         popQuestion();
-    })
+    });
+    $("#submitButton").on("click", function () {
+        $("#yourScoresDiv").show();
+        renderScores();
 
+    });
 }
 );
 function popQuestion() {
     if (counter == questArray.length) {
         endQuiz();
     }
-    let question = questArray[counter];
-    let ansA = ansAArray[counter];
-    let ansB = ansBArray[counter];
-    let ansC = ansCArray[counter];
-    let ansD = ansDArray[counter];
-    let actAns = actAnswer[counter];
-    let tally = 0;
+    else {
+        let question = questArray[counter];
+        let ansA = ansAArray[counter];
+        let ansB = ansBArray[counter];
+        let ansC = ansCArray[counter];
+        let ansD = ansDArray[counter];
+        let actAns = actAnswer[counter];
+        let tally = 0;
 
-    $("#title").hide();
-    $("#emptyQuiz").text(question);
-    // hide the start button and shows the question
-    $("#start-button").hide();
-    // show the possible answers
-    $("#aAnsdiv").text(ansA);
-    $("#bAnsdiv").text(ansB);
-    $("#cAnsdiv").text(ansC);
-    $("#dAnsdiv").text(ansD);
+        $("#title").hide();
+        $("#emptyQuiz").text(question);
+        // hide the start button and shows the question
+        $("#start-button").hide();
+        // show the possible answers
+        $("#aAnsdiv").text(ansA);
+        $("#bAnsdiv").text(ansB);
+        $("#cAnsdiv").text(ansC);
+        $("#dAnsdiv").text(ansD);
 
-    // show the other buttons
-    $("#quizAnsRow").show();
-    // start the timer
-    $("#main").show();
-    
+        // show the other buttons
+        $("#quizAnsRow").show();
+        // start the timer
+        $("#main").show();
+    }
 
 
 
@@ -78,6 +86,8 @@ function validateAnswer(inputAns) {
         counter++;
         // maths that subtracts 15 seconds from timer
         secondsLeft = (secondsLeft - 15);
+        $("#main").text(secondsLeft);
+        
         if (secondsLeft <= 0) {
 
 
@@ -104,6 +114,15 @@ function setTime() {
 function endQuiz() {
     clearInterval(timer);
     $("#quizAnsRow").hide();
-    
+    $("#initialsGoHere").show();
+
 }
 
+// shows scoreboard(is supposed to at least)
+function renderScores() {
+    
+    document.getElementById("yourScores").innerHTML = document.getElementById("initials").value + "-" + (secondsLeft+ 1) ;
+    $("#initialsGoHere").hide();
+
+
+}
