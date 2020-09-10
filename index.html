@@ -22,7 +22,9 @@
             <div class="row">
                 <div class="col-md-12">
 
-                    <h1>Coding Quiz!!!</h1>
+                    <h1 id= "title">Coding Quiz!!!</h1>
+                    <h1 class="time"></h1>
+                    <div id="main"></div>
                 </div>
             </div>
             <div class="row">
@@ -35,22 +37,25 @@
             <div class="row" id="quizAnsRow">
 
                 <div class="col-md-12">
-                    <div id="emptyQuiz"></div>
-
-                    <button id="aAnswerButton" class="btn btn-primary btn-lg">A</button>
-                    <div id="aAnsdiv">This is the A Answer</div>
+                    <div>
+                        <h3 id ="emptyQuiz"> </h3>
+                    </div>
                     <br>
 
-                    <button id="bAnswerButton" class="btn btn-primary btn-lg">B</button>
-                    <div id="bAnsdiv">This is the B Answer</div>
+                    <button id="aAnswerButton" onclick="validateAnswer('A')" class="btn btn-primary btn-lg">A</button>
+                    <h4 id="aAnsdiv">This is the A Answer</h4>
                     <br>
 
-                    <button id="cAnswerButton" class="btn btn-primary btn-lg">C</button>
-                    <div id="cAnsdiv">This is the C Answer</div>
+                    <button id="bAnswerButton" onclick="validateAnswer('B')" class="btn btn-primary btn-lg">B</button>
+                    <h4 id="bAnsdiv">This is the B Answer</h4>
                     <br>
 
-                    <button id="dAnswerButton" class="btn btn-primary btn-lg">D</button>
-                    <div id="dAnsdiv">This is the D Answer</div>
+                    <button id="cAnswerButton" onclick="validateAnswer('C')" class="btn btn-primary btn-lg">C</button>
+                    <h4 id="cAnsdiv">This is the C Answer</h4>
+                    <br>
+
+                    <button id="dAnswerButton" onclick="validateAnswer('D')" class="btn btn-primary btn-lg">D</button>
+                    <h4 id="dAnsdiv">This is the D Answer</h4>
                     <br>
 
                 </div>

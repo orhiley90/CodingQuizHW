@@ -12,52 +12,91 @@ let actAnswer = ["A", "A", "A", "A", "B"];
 
 let counter = 0;
 
+let timeEl = $(".time");
+
+let mainEl = $("#main");
+
+let secondsLeft = 0;
+
+let timer = setInterval(setTime, 1000);
 
 
 $(document).ready(function () {
     $("#quizAnsRow").hide();
-
+    $("#main").hide();
     console.log($("#start-button"));
     $("#start-button").on("click", function () {
-        startQuiz();
+        secondsLeft = 100;
+        popQuestion();
     })
 
 }
 );
-function startQuiz() {
+function popQuestion() {
 
-        let question = questArray[counter];
-        let ansA = ansAArray[counter];
-        let ansB = ansBArray[counter];
-        let ansC = ansCArray[counter];
-        let ansD = ansDArray[counter];
-        let actAns = actAnswer[counter];
-        let tally = 0;
-        
-        $("<ul>" + question + "</ul>").appendTo("#emptyQuiz");
-        // hide the start button 
-        $("#start-button").hide();
-        // show the question
-        $("#aAnsdiv").text(ansA);
-        $("#bAnsdiv").text(ansB);
-        $("#cAnsdiv").text(ansC);
-        $("#dAnsdiv").text(ansD);
+    let question = questArray[counter];
+    let ansA = ansAArray[counter];
+    let ansB = ansBArray[counter];
+    let ansC = ansCArray[counter];
+    let ansD = ansDArray[counter];
+    let actAns = actAnswer[counter];
+    let tally = 0;
+    
+    $("#title").hide();
+    $("#emptyQuiz").text(question);
+    // hide the start button and shows the question
+    $("#start-button").hide();
+    // show the possible answers
+    $("#aAnsdiv").text(ansA);
+    $("#bAnsdiv").text(ansB);
+    $("#cAnsdiv").text(ansC);
+    $("#dAnsdiv").text(ansD);
 
-        // show the other buttons
-        $("#quizAnsRow").show();
-        // start the timer
+    // show the other buttons
+    $("#quizAnsRow").show();
+    // start the timer
+    $("#main").show();
+    
+  
 
-        //    Button A when clicked will call function to compare answer 
-        //    Button B when clicked will call function to compare answer
-        //    Button C when clicked will call function to compare answer
-        //    Button D when clicked will call function to compare answer
+    //    This function should check answer and then subtract time or count up correct answers depending on if it is correct or 
+    // if(actAns =  ansA.charAt(0)){
+    // tally = (tally + 1);
+    // else()
+    // subtract 5 seconds from timer
+    // }
+    //  make the buttons = there corresponding letter and compare that to the actAnswer array
+    // }
 
-        //    This function should check answer and then subtract time or count up correct answers depending on if it is correct or 
-        // if(actAns =  ansA.charAt(0)){
-        // tally = (tally + 1);
-        // else()
-        // subtract 5 seconds from timer
-        // }
-        //  make the buttons = there corresponding letter and compare that to the actAnswer array
-        // }
+    // this function compares the selected answer to the actual answer
+}
+function validateAnswer(inputAns) {
+    if (actAnswer[counter] == inputAns) {
+        counter++;
     }
+    else {
+        counter++;
+        // maths that subtracts 15 seconds from timer
+        secondsLeft = (secondsLeft - 15);
+        if (secondsLeft <= 0){
+            clearInterval(timer);
+            secondsLeft = 0;
+
+            // will end the quiz
+        }
+    }
+    popQuestion();
+}
+
+function setTime() {
+    
+
+    $("#main").text(secondsLeft--);
+
+   
+}
+
+
+function endQuiz(){
+    
+}
